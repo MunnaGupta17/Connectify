@@ -1,2 +1,2 @@
-# Probo
-Probo is an opinion trading platform.
+# Connectify
+Social Network Website.
