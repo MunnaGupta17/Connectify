@@ -1,5 +1,6 @@
 package com.connectify.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -24,7 +25,7 @@ public class User {
 	private String bio;
 	private String image;
 	@OneToMany(cascade = CascadeType.ALL)
-	private List<User> friends;
+	private List<User> friends = new ArrayList<>();
 	
 	public User() {
 		// TODO Auto-generated constructor stub
