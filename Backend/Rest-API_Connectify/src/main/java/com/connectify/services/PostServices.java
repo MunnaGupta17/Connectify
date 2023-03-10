@@ -7,9 +7,9 @@ import com.connectify.models.Post;
 
 public interface PostServices {
 	
-	public Post post()throws PostException;
-	public String deletePost()throws PostException;
-	public Post editPost()throws PostException;
+	public Post post(Post post)throws PostException;
+	public String deletePost(Integer postId)throws PostException;
+	public String editPost(Integer postId,Post post)throws PostException;
 	public Integer likedPost()throws PostException;
 	public Integer unlikedPost()throws PostException;
     public Comment addComment()throws PostException,CommentException;
