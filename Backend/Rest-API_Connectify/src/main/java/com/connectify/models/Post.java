@@ -16,16 +16,13 @@ public class Post {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer postId;
 	private String discription;
-	private Long likes;
+	private List<Integer> likes = new ArrayList<>();
 	private List<String> comments = new ArrayList<>();
 	private LocalDateTime postTimeAndDate = LocalDateTime.now();
 	
 	public Post() {
 		// TODO Auto-generated constructor stub
 	}
-
-
-
 
 	public Integer getPostId() {
 		return postId;
@@ -43,11 +40,11 @@ public class Post {
 		this.discription = discription;
 	}
 
-	public Long getLikes() {
+	public List<Integer> getLikes() {
 		return likes;
 	}
 
-	public void setLikes(Long likes) {
+	public void setLikes(List<Integer> likes) {
 		this.likes = likes;
 	}
 
@@ -72,7 +69,12 @@ public class Post {
 		return "Post [postId=" + postId + ", discription=" + discription + ", likes=" + likes + ", comments=" + comments
 				+ ", postTimeAndDate=" + postTimeAndDate + "]";
 	}
+
 	
+
+
+
+
 	
 	
 

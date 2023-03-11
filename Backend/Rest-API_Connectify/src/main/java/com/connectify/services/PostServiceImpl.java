@@ -15,6 +15,14 @@ public class PostServiceImpl implements PostServices{
 	@Autowired
 	private PostRepo pr;
 
+	
+	public boolean isPost(Integer postId) {
+		Optional<Post> p = pr.findById(postId);
+		if(p.isPresent()) {
+			return true;
+		}
+	}
+	
 	@Override
 	public Post post(Post post) throws PostException {
 		// TODO Auto-generated method stub
@@ -49,8 +57,9 @@ public class PostServiceImpl implements PostServices{
 	}
 
 	@Override
-	public Integer likedPost() throws PostException {
+	public Integer likedPost(Integer postId,Integer userId) throws PostException {
 		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
