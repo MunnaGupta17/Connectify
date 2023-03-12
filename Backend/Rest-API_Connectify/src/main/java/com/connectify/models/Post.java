@@ -16,6 +16,10 @@ public class Post {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer postId;
 	private String discription;
+	/*
+	 * the idea here is to save the user id of user in likes and pull the
+	 * object when needed for fronted to show info about user
+	 */
 	private List<Integer> likes = new ArrayList<>();
 	private List<String> comments = new ArrayList<>();
 	private LocalDateTime postTimeAndDate = LocalDateTime.now();
