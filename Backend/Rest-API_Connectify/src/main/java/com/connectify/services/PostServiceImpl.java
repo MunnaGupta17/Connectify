@@ -1,6 +1,8 @@
 package com.connectify.services;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -9,6 +11,7 @@ import com.connectify.JPA.PostRepo;
 import com.connectify.JPA.UserRepo;
 import com.connectify.exceptionHandling.CommentException;
 import com.connectify.exceptionHandling.PostException;
+import com.connectify.exceptionHandling.UserException;
 import com.connectify.models.Comment;
 import com.connectify.models.Post;
 import com.connectify.models.User;
@@ -27,6 +30,10 @@ public class PostServiceImpl implements PostServices{
 			Optional<Post> post = pr.findById(id);
 			if(post.isPresent())return true;
 			else return false;
+		}else if(type.equals("user")) {
+			Optional<User> user = ur.findById(id);
+			if(user.isPresent())return true;
+			return false;
 		}else {
 		    Optional<Comment> comment = cr.findById(id);
 		    if(comment.isPresent())return true;
@@ -80,28 +87,65 @@ public class PostServiceImpl implements PostServices{
 	}
 
 	@Override
-	public Integer likedPost(Integer postId,Integer userId) throws PostException {
+	public Integer likedPost(Integer postId,Integer userId) throws PostException,UserException {
 		// TODO Auto-generated method stub
-		
-		return null;
+		if(isAvail(userId, "user")) {
+			if(isAvail(postId,"post")) {
+				Post post = (Post)getObject(postId,"post");
+				post.getLikes().add(userId);
+				pr.save(post);
+				return post.getLikes().size();
+			}else {
+				throw new PostException("wrong post id");
+			}
+		}else {
+			throw new UserException("worng user id");
+		}
 	}
 
 	@Override
-	public Integer unlikedPost(Integer postId,Integer userId) throws PostException {
+	public Integer unlikedPost(Integer postId,Integer userId) throws PostException,UserException {
 		// TODO Auto-generated method stub
-		return 0;
+		if(isAvail(userId, "user")) {
+			if(isAvail(postId,"post")) {
+				Post post = (Post)getObject(postId,"post");
+				Set<Integer> set = post.getLikes();
+				set.remove(userId);
+				pr.save(post);
+				return post.getLikes().size();
+			}else {
+				throw new PostException("wrong post id");
+			}
+		}else {
+			throw new UserException("worng user id");
+		}
 	}
 
 	@Override
-	public Comment addComment() throws PostException, CommentException {
+	public Comment addComment(Comment comment,Integer postId) throws PostException, CommentException {
 		// TODO Auto-generated method stub
-		return null;
+		if(comment == null)throw new CommentException("comment is null");
+		if(isAvail(postId,"post")) {
+			Post post = (Post)getObject(postId,"post");
+			post.getComments().add(comment);
+			pr.save(post);
+			return comment;
+		}else {
+			throw new PostException("wrong post id");
+		}
 	}
 
 	@Override
-	public Comment replyComment() throws CommentException {
+	public Comment replyComment(Comment comment,Integer parentCommentId) throws CommentException {
 		// TODO Auto-generated method stub
-		return null;
+		if(comment == null) throw new CommentException("comment is null");
+		if(isAvail(parentCommentId, "comment")) {
+			Comment parentComment = (Comment)getObject(parentCommentId,"comment");
+			parentComment.getReplys().add(comment);
+			return comment;
+		}else {
+			throw new CommentException("parent comment id is wrong");
+		}
 	}
 
 }

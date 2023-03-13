@@ -13,7 +13,7 @@ public interface PostServices {
 	public String editPost(Integer postId,Post post)throws PostException;
 	public Integer likedPost(Integer postId,Integer userId)throws PostException,UserException;
 	public Integer unlikedPost(Integer postId,Integer userId)throws PostException,UserException;
-    public Comment addComment()throws PostException,CommentException;
-    public Comment replyComment()throws CommentException;
+    public Comment addComment(Comment comment,Integer postId)throws PostException,CommentException;
+    public Comment replyComment(Comment comment,Integer parentCommentId)throws CommentException;
 
 }

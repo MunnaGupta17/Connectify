@@ -2,12 +2,15 @@ package com.connectify.models;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Post {
@@ -20,8 +23,9 @@ public class Post {
 	 * the idea here is to save the user id of user in likes and pull the
 	 * object when needed for fronted to show info about user
 	 */
-	private List<Integer> likes = new ArrayList<>();
-	private List<String> comments = new ArrayList<>();
+	private Set<Integer> likes = new HashSet<>();
+	@OneToMany
+	private List<Comment> comments = new ArrayList<>();
 	private LocalDateTime postTimeAndDate = LocalDateTime.now();
 	
 	public Post() {
@@ -44,19 +48,23 @@ public class Post {
 		this.discription = discription;
 	}
 
-	public List<Integer> getLikes() {
+	
+
+	public Set<Integer> getLikes() {
 		return likes;
 	}
 
-	public void setLikes(List<Integer> likes) {
+	public void setLikes(Set<Integer> likes) {
 		this.likes = likes;
 	}
 
-	public List<String> getComments() {
+	
+
+	public List<Comment> getComments() {
 		return comments;
 	}
 
-	public void setComments(List<String> comments) {
+	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
 

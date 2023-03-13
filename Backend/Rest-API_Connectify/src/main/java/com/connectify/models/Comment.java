@@ -25,4 +25,54 @@ public class Comment {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Integer getPostId() {
+		return postId;
+	}
+
+	public void setPostId(Integer postId) {
+		this.postId = postId;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	public Long getLikes() {
+		return likes;
+	}
+
+	public void setLikes(Long likes) {
+		this.likes = likes;
+	}
+
+	public List<Comment> getReplys() {
+		return replys;
+	}
+
+	public void setReplys(List<Comment> replys) {
+		this.replys = replys;
+	}
+
+	public LocalDateTime getPostTimeAndDate() {
+		return postTimeAndDate;
+	}
+
+	public void setPostTimeAndDate(LocalDateTime postTimeAndDate) {
+		this.postTimeAndDate = postTimeAndDate;
+	}
+
+	
+	
 }
